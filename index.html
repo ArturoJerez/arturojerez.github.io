@@ -3,9 +3,571 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bienvenido!</title>
-    <link rel="stylesheet" href="index.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <title>Arturo Jerez | Programador</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Work+Sans:wght@600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --yellow: #FFF200;
+            --light-blue: #AED9FF;
+            --black: #000000;
+            --white: #FFFFFF;
+            --shadow-distance: 7px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Space Mono', monospace;
+            background-color: #f6f6f6;
+            color: var(--black);
+            line-height: 1.6;
+        }
+        
+        h1, h2, h3 {
+            font-family: 'Work Sans', sans-serif;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+        
+        /* Navbar */
+        #navbar {
+            background-color: var(--yellow);
+            border: 4px solid var(--black);
+            box-shadow: var(--shadow-distance) var(--shadow-distance) 0 var(--black);
+            position: sticky;
+            top: 10px;
+            z-index: 1000;
+            width: calc(100% - 20px);
+            margin: 10px auto;
+            transition: transform 0.3s;
+        }
+        
+        #navbar:hover {
+            transform: translate(-3px, -3px);
+            box-shadow: calc(var(--shadow-distance) + 3px) calc(var(--shadow-distance) + 3px) 0 var(--black);
+        }
+        
+        #navbar ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 15px;
+        }
+        
+        #navbar li {
+            margin: 0 15px;
+        }
+        
+        #navbar a {
+            color: var(--black);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 18px;
+            text-transform: uppercase;
+            position: relative;
+            transition: all 0.3s;
+        }
+        
+        #navbar a:hover {
+            background-color: var(--black);
+            color: var(--yellow);
+            padding: 3px 6px;
+        }
+        
+        /* Mobile navigation */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 10px;
+        }
+        
+        /* Header */
+        header {
+            background-color: var(--yellow);
+            padding: 80px 20px;
+            text-align: center;
+            margin: 20px;
+            border: 4px solid var(--black);
+            box-shadow: var(--shadow-distance) var(--shadow-distance) 0 var(--black);
+            position: relative;
+        }
+        
+        header:before {
+            content: "";
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            width: 60px;
+            height: 60px;
+            background-color: var(--black);
+            z-index: -1;
+            border-radius: 50%;
+        }
+        
+        header:after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            right: -10px;
+            width: 40px;
+            height: 40px;
+            background-color: var(--black);
+            z-index: -1;
+        }
+        
+        .header-content h1 {
+            font-size: 4rem;
+            margin-bottom: 10px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .header-content h1:after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background-color: var(--black);
+        }
+        
+        .header-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        /* Secciones alternantes */
+        section {
+            padding: 60px 20px;
+            margin: 40px 20px;
+            border: 4px solid var(--black);
+            box-shadow: var(--shadow-distance) var(--shadow-distance) 0 var(--black);
+            transition: transform 0.3s;
+        }
+        
+        section:hover {
+            transform: translate(-3px, -3px);
+            box-shadow: calc(var(--shadow-distance) + 3px) calc(var(--shadow-distance) + 3px) 0 var(--black);
+        }
+        
+        section:nth-of-type(odd) {
+            background-color: var(--yellow);
+        }
+        
+        section:nth-of-type(even) {
+            background-color: var(--light-blue);
+            border-color: var(--white);
+            box-shadow: var(--shadow-distance) var(--shadow-distance) 0 var(--white);
+        }
+        
+        section:nth-of-type(even):hover {
+            box-shadow: calc(var(--shadow-distance) + 3px) calc(var(--shadow-distance) + 3px) 0 var(--white);
+        }
+        
+        section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            display: inline-block;
+            position: relative;
+            padding: 5px 15px;
+            background: var(--black);
+            color: var(--white);
+            transform: rotate(-2deg);
+        }
+        
+        /* Skills grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .skill-card {
+            background-color: var(--white);
+            border: 3px solid var(--black);
+            padding: 20px;
+            box-shadow: 6px 6px 0 var(--black);
+            transition: transform 0.2s;
+        }
+        
+        .skill-card:hover {
+            transform: translate(-3px, -3px);
+            box-shadow: 9px 9px 0 var(--black);
+        }
+        
+        .skill-card h3 {
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            color: var(--black);
+            border-bottom: 3px solid var(--black);
+            padding-bottom: 5px;
+        }
+        
+        .skill-card ul {
+            list-style-type: none;
+        }
+        
+        .skill-card li {
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 20px;
+        }
+        
+        .skill-card li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--black);
+            font-weight: bold;
+        }
+        
+        /* Projects grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .project-card {
+            background-color: var(--white);
+            border: 3px solid var(--black);
+            padding: 25px;
+            box-shadow: 6px 6px 0 var(--black);
+            transition: transform 0.2s;
+        }
+        
+        .project-card:hover {
+            transform: translate(-3px, -3px);
+            box-shadow: 9px 9px 0 var(--black);
+        }
+        
+        .project-card h3 {
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            color: var(--black);
+        }
+        
+        .project-card p {
+            margin-bottom: 10px;
+        }
+        
+        /* Contacto */
+        #contact a {
+            display: inline-block;
+            background-color: var(--black);
+            color: var(--white);
+            padding: 10px 20px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 20px;
+            border: 2px solid var(--black);
+            transition: all 0.3s;
+        }
+        
+        #contact a:hover {
+            background-color: var(--white);
+            color: var(--black);
+            transform: translate(-3px, -3px);
+            box-shadow: 5px 5px 0 var(--black);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--black);
+            color: var(--white);
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+        }
+        
+        /* Theme toggle - manteniendo funcionalidad */
+        .theme-toggle {
+            display: none;
+        }
+        
+        .theme-toggle-label {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: var(--yellow);
+            border: 3px solid var(--black);
+            padding: 10px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 1001;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 4px 4px 0 var(--black);
+            transition: all 0.3s;
+        }
+        
+        .theme-toggle-label:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0 var(--black);
+        }
+        
+        /* Dark mode */
+        .theme-toggle:checked ~ body {
+            background-color: #121212;
+            color: var(--white);
+        }
+        
+        /* Animaciones */
+        .animate-pop-in {
+            animation: pop-in 0.5s ease-out forwards;
+            opacity: 0;
+        }
+        
+        .animate-fade-in {
+            animation: fade-in 1s ease-out forwards;
+            opacity: 0;
+        }
+        
+        @keyframes pop-in {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px) scale(0.8);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        @keyframes fade-in {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+        
+        /* Elementos decorativos de neobrutalism */
+        .dot-decoration {
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background-color: var(--black);
+        }
+        
+        .dot-1 {
+            top: 30px;
+            right: 40px;
+        }
+        
+        .dot-2 {
+            bottom: 40px;
+            left: 30px;
+        }
+        
+        .line-decoration {
+            position: absolute;
+            background-color: var(--black);
+            width: 6px;
+            height: 70px;
+            transform: rotate(45deg);
+        }
+        
+        .line-1 {
+            top: 20px;
+            left: 40px;
+        }
+        
+        .line-2 {
+            bottom: 20px;
+            right: 40px;
+        }
+        
+        /* Responsive design */
+        @media screen and (max-width: 992px) {
+            .skills-grid,
+            .projects-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            section {
+                padding: 40px 15px;
+                margin: 30px 15px;
+            }
+            
+            .header-content h1 {
+                font-size: 3.5rem;
+            }
+            
+            .header-content h2 {
+                font-size: 2rem;
+            }
+        }
+        
+        @media screen and (max-width: 768px) {
+            /* Fixed mobile navbar */
+            #navbar {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                margin: 0;
+                border-radius: 0;
+                box-shadow: 0 4px 0 var(--black);
+            }
+            
+            #navbar ul {
+                display: none;
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+                padding: 0;
+            }
+            
+            #navbar ul.show {
+                display: flex;
+            }
+            
+            #navbar li {
+                width: 100%;
+                text-align: center;
+                margin: 0;
+                border-bottom: 2px solid var(--black);
+            }
+            
+            #navbar li:last-child {
+                border-bottom: none;
+            }
+            
+            #navbar a {
+                display: block;
+                padding: 15px;
+                font-size: 16px;
+            }
+            
+            #navbar a:hover {
+                background-color: var(--black);
+                color: var(--yellow);
+                padding: 15px;
+            }
+            
+            .mobile-menu-toggle {
+                display: block;
+                position: absolute;
+                top: 10px;
+                left: 10px;
+                z-index: 1002;
+                background-color: var(--yellow);
+                border: 2px solid var(--black);
+                width: 40px;
+                height: 40px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                box-shadow: 3px 3px 0 var(--black);
+            }
+            
+            /* Push header down to accommodate fixed navbar */
+            header {
+                margin-top: 70px;
+                padding: 60px 15px;
+            }
+            
+            .header-content h1 {
+                font-size: 2.8rem;
+            }
+            
+            .header-content h2 {
+                font-size: 1.8rem;
+            }
+            
+            /* Hide some decorations on mobile */
+            .line-decoration {
+                display: none;
+            }
+            
+            .dot-decoration {
+                width: 15px;
+                height: 15px;
+            }
+            
+            section h2 {
+                font-size: 2rem;
+            }
+            
+            /* Theme toggle position adjustment */
+            .theme-toggle-label {
+                top: 10px;
+                right: 10px;
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+        }
+        
+        @media screen and (max-width: 576px) {
+            .skills-grid,
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            header {
+                padding: 40px 10px;
+                margin: 60px 10px 20px 10px;
+            }
+            
+            .header-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .header-content h2 {
+                font-size: 1.5rem;
+            }
+            
+            section {
+                padding: 30px 15px;
+                margin: 20px 10px;
+            }
+            
+            section h2 {
+                font-size: 1.8rem;
+                padding: 5px 10px;
+            }
+            
+            .skill-card, 
+            .project-card {
+                padding: 15px;
+            }
+            
+            .skill-card h3,
+            .project-card h3 {
+                font-size: 1.3rem;
+            }
+            
+            /* Remove hover effects on touch devices */
+            section:hover,
+            .skill-card:hover,
+            .project-card:hover,
+            #contact a:hover {
+                transform: none;
+                box-shadow: var(--shadow-distance) var(--shadow-distance) 0 var(--black);
+            }
+            
+            section:nth-of-type(even):hover {
+                box-shadow: var(--shadow-distance) var(--shadow-distance) 0 var(--white);
+            }
+        }
+    </style>
 </head>
 <body>
 
@@ -14,6 +576,7 @@
 
     <!-- Menú de navegación -->
     <nav id="navbar">
+        <button class="mobile-menu-toggle">☰</button>
         <ul>
             <li><a href="#about">Sobre Mí</a></li>
             <li><a href="#skills">Habilidades</a></li>
@@ -24,11 +587,15 @@
 
     <!-- Header con animación -->
     <header>
+        <div class="dot-decoration dot-1"></div>
+        <div class="line-decoration line-1"></div>
         <div class="header-content">
             <h1 class="animate-pop-in">Arturo Jerez</h1>
             <h2 class="animate-pop-in">Programador</h2>
             <p class="animate-pop-in">Especializado en desarrollo backend</p>
         </div>
+        <div class="dot-decoration dot-2"></div>
+        <div class="line-decoration line-2"></div>
     </header>
 
     <!-- Sección Sobre Mí -->
@@ -119,10 +686,102 @@
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2025</p>
+        <p>&copy; 2025 | Diseño Neobrutalism por Arturo Jerez</p>
     </footer>
 
-    <!-- JavaScript -->
-    <script src="index.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
+            const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+            const navbarMenu = document.querySelector('#navbar ul');
+            
+            mobileMenuToggle.addEventListener('click', function() {
+                navbarMenu.classList.toggle('show');
+                this.textContent = navbarMenu.classList.contains('show') ? '✕' : '☰';
+            });
+            
+            // Close menu when clicking on a link (mobile)
+            const navLinks = document.querySelectorAll('#navbar a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    if (window.innerWidth <= 768) {
+                        navbarMenu.classList.remove('show');
+                        mobileMenuToggle.textContent = '☰';
+                    }
+                });
+            });
+            
+            // Scroll animation
+            const observerOptions = {
+                threshold: 0.1
+            };
+            
+            const observer = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+            
+            document.querySelectorAll('.animate-fade-in').forEach(el => {
+                el.style.opacity = 0;
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+                observer.observe(el);
+            });
+            
+            // Theme toggle functionality
+            const themeToggle = document.getElementById('theme-toggle');
+            const themeToggleLabel = document.querySelector('.theme-toggle-label');
+            
+            themeToggle.addEventListener('change', function() {
+                if (this.checked) {
+                    document.body.style.backgroundColor = '#121212';
+                    document.body.style.color = '#ffffff';
+                    themeToggleLabel.innerHTML = '☀️';
+                } else {
+                    document.body.style.backgroundColor = '#f6f6f6';
+                    document.body.style.color = '#000000';
+                    themeToggleLabel.innerHTML = '🌙';
+                }
+            });
+            
+            // Smooth scrolling para enlaces internos
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    const target = document.querySelector(this.getAttribute('href'));
+                    const navbarHeight = document.querySelector('#navbar').offsetHeight;
+                    const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+            
+            // Ajuste para pantallas pequeñas - eliminación de hover en mobile
+            function checkScreenSize() {
+                if (window.innerWidth <= 576) {
+                    document.querySelectorAll('section, .skill-card, .project-card, #contact a').forEach(el => {
+                        el.style.transition = 'none';
+                    });
+                } else {
+                    document.querySelectorAll('section, .skill-card, .project-card, #contact a').forEach(el => {
+                        el.style.transition = 'transform 0.3s, box-shadow 0.3s';
+                    });
+                }
+            }
+            
+            // Verificar al cargar y al cambiar el tamaño de la ventana
+            checkScreenSize();
+            window.addEventListener('resize', checkScreenSize);
+        });
+    </script>
 </body>
 </html>
